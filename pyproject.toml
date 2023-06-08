@@ -1,0 +1,64 @@
+[project]
+name = "storekit-python"
+version = "0.1.0"
+description = "The Storekit Python library provides support for in-app purchases and interactions with the App Store."
+authors = [
+    { name = "crowser", email = "xuwendi@xiachufang.com" },
+]
+dependencies = [
+    "requests>=2.12.0",
+    "pydantic>=1.9.0",
+    "PyJWT>=2.6.0",
+    "cryptography>=41.0.0",
+]
+requires-python = ">=3.7"
+readme = "README.md"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pdm.dev-dependencies]
+lint = [
+    "pip",
+    "pre-commit",
+    "mypy",
+]
+test = [
+    "coverage[toml]",
+    "dirty-equals",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-pretty",
+    "pytest-examples",
+]
+
+[tool.ruff]
+line-length = 120
+select = [
+    "E", # pycodestyle
+    "F", # pyflakes
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line too long, handled by black
+]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+line-length = 120
+target-version = ["py37", "py38", "py39", "py310"]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+disallow_untyped_defs = true
+
+[tool.coverage.run]
+source = ['storekit']
+branch = true
+context = '${CONTEXT}'

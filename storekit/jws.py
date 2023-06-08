@@ -44,7 +44,7 @@ def decode(token: str) -> Dict[str, Any]:
             ec.ECDSA(c.signature_hash_algorithm),  # type: ignore
         )
 
-    return jwt.decode(jwt=token, key=cert_chain[0].public_key(), algorithms=[header["alg"]])
+    return jwt.decode(jwt=token, key=cert_chain[0].public_key(), algorithms=[header["alg"]])  # type: ignore
 
 
 JwsT = TypeVar("JwsT", bound="BaseModel")

@@ -22,9 +22,8 @@ jobs:
       - name: install deps
         run: pdm install -G lint
 
-      - uses: pre-commit/action@v3.0.0
-        with:
-          extra_args: --all-files --verbose
+      - name: run lints
+        run: pdm run pre-commit run --all-files
 
   test:
     runs-on: ubuntu-latest

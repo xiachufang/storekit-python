@@ -1,5 +1,4 @@
-class AppStoreError(Exception):
-    pass
+from storekit.exceptions import AppStoreError
 
 
 class APIError(AppStoreError):

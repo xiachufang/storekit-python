@@ -57,5 +57,5 @@ class StatusResponse(BaseModel):
 
     data: List[SubscriptionGroupIdentifierItem]
     environment: Environment
-    app_apple_id: Optional[int] = Field(alias="appAppleId")
+    app_apple_id: Optional[int] = Field(None, alias="appAppleId")
     bundle_id: str = Field(alias="bundleId")

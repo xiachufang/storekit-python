@@ -76,12 +76,12 @@ class Data(BaseModel):
     https://developer.apple.com/documentation/appstoreservernotifications/data
     """
 
-    app_apple_id: Optional[int] = Field(alias="appAppleId")
+    app_apple_id: Optional[int] = Field(None, alias="appAppleId")
     bundle_id: str = Field(alias="bundleId")
-    bundle_version: Optional[str] = Field(alias="bundleVersion")
+    bundle_version: Optional[str] = Field(None, alias="bundleVersion")
     environment: Environment
-    renewal_info: Optional[JWSRenewalInfoDecodedPayload] = Field(alias="signedRenewalInfo")
-    transaction_info: Optional[JWSTransactionDecodedPayload] = Field(alias="signedTransactionInfo")
+    renewal_info: Optional[JWSRenewalInfoDecodedPayload] = Field(None, alias="signedRenewalInfo")
+    transaction_info: Optional[JWSTransactionDecodedPayload] = Field(None, alias="signedTransactionInfo")
 
 
 class Summary(BaseModel):
@@ -92,7 +92,7 @@ class Summary(BaseModel):
 
     request_identifier: str = Field(alias="requestIdentifier")
     environment: Environment
-    app_apple_id: Optional[int] = Field(alias="appAppleId")
+    app_apple_id: Optional[int] = Field(None, alias="appAppleId")
     bundle_id: str = Field(alias="bundleId")
     product_id: str = Field(alias="productId")
     storefront_country_codes: str = Field(alias="storefrontCountryCodes")
@@ -114,12 +114,14 @@ class ResponseBodyV2DecodedPayload(JWS):
     """
 
     notification_type: NotificationType = Field(alias="notificationType")
-    subtype: Optional[Subtype]
+    subtype: Optional[Subtype] = None
     data: Optional[Data] = Field(
-        description="The data and summary fields are mutually exclusive. The payload contains one of the fields, but not both."
+        None,
+        description="The data and summary fields are mutually exclusive. The payload contains one of the fields, but not both.",
     )
     summary: Optional[Summary] = Field(
-        description="The data and summary fields are mutually exclusive. The payload contains one of the fields, but not both."
+        None,
+        description="The data and summary fields are mutually exclusive. The payload contains one of the fields, but not both.",
     )
     version: str
     signed_date: int = Field(alias="signedDate", description="UNIX time, in milliseconds")

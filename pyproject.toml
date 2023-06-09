@@ -58,6 +58,12 @@ target-version = ["py37", "py38", "py39", "py310"]
 plugins = ["pydantic.mypy"]
 disallow_untyped_defs = true
 
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
 [tool.coverage.run]
 source = ['storekit']
 branch = true

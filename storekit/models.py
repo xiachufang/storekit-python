@@ -122,14 +122,14 @@ class JWSRenewalInfoDecodedPayload(JWS):
     recent_subscription_start_date: int = Field(
         alias="recentSubscriptionStartDate", description="UNIX time, in milliseconds"
     )
-    expiration_intent: Optional[int] = Field(alias="expirationIntent")
+    expiration_intent: Optional[int] = Field(None, alias="expirationIntent")
     grace_period_expires_date: Optional[int] = Field(
-        alias="gracePeriodExpiresDate", description="UNIX time, in milliseconds"
+        None, alias="gracePeriodExpiresDate", description="UNIX time, in milliseconds"
     )
-    is_in_billing_retry_period: Optional[bool] = Field(alias="isInBillingRetryPeriod")
-    offer_type: Optional[OfferType] = Field(alias="offerType")
-    offer_identifier: Optional[str] = Field(alias="offerIdentifier")
-    price_increase_status: Optional[PriceIncreaseStatus] = Field(alias="priceIncreaseStatus")
+    is_in_billing_retry_period: Optional[bool] = Field(None, alias="isInBillingRetryPeriod")
+    offer_type: Optional[OfferType] = Field(None, alias="offerType")
+    offer_identifier: Optional[str] = Field(None, alias="offerIdentifier")
+    price_increase_status: Optional[PriceIncreaseStatus] = Field(None, alias="priceIncreaseStatus")
 
 
 class JWSTransactionDecodedPayload(JWS):
@@ -150,13 +150,14 @@ class JWSTransactionDecodedPayload(JWS):
     signed_date: int = Field(alias="signedDate", description="UNIX time, in milliseconds")
     environment: Environment
     # only for auto-renewable subscriptions
-    web_order_line_item_id: Optional[str] = Field(alias="webOrderLineItemId")
-    subscription_group_identifier: Optional[str] = Field(alias="subscriptionGroupIdentifier")
-    expires_date: Optional[int] = Field(alias="expiresDate", description="UNIX time, in milliseconds")
+    web_order_line_item_id: Optional[str] = Field(None, alias="webOrderLineItemId")
+    subscription_group_identifier: Optional[str] = Field(None, alias="subscriptionGroupIdentifier")
+    expires_date: Optional[int] = Field(None, alias="expiresDate", description="UNIX time, in milliseconds")
     # other scene
-    app_account_token: Optional[str] = Field(alias="appAccountToken", description="UUID")
-    is_upgraded: Optional[bool] = Field(alias="isUpgraded")
-    offer_type: Optional[OfferType] = Field(alias="offerType")
-    offer_identifier: Optional[str] = Field(alias="offerIdentifier")
-    revocation_date: Optional[int] = Field(alias="revocationDate", description="UNIX time, in milliseconds")
-    revocation_reason: Optional[int] = Field(alias="revocationReason")
+    app_account_token: Optional[str] = Field(None, alias="appAccountToken", description="UUID")
+    is_upgraded: Optional[bool] = Field(None, alias="isUpgraded")
+    revocation_date: Optional[int] = Field(None, alias="revocationDate", description="UNIX time, in milliseconds")
+    revocation_reason: Optional[int] = Field(None, alias="revocationReason")
+    # offer
+    offer_type: Optional[OfferType] = Field(None, alias="offerType")
+    offer_identifier: Optional[str] = Field(None, alias="offerIdentifier")

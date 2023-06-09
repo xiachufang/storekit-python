@@ -8,7 +8,7 @@ import requests
 
 from storekit.utils.enum import StrEnum
 
-from .error import APIError, AuthenticationError, RetryableError
+from .exceptions import APIError, AuthenticationError, RetryableError
 from .history_response import GetTransactionHistoryQueryParameters, HistoryResponse
 from .order_look_up_response import OrderLookupResponse
 from .status_response import StatusResponse
@@ -42,7 +42,7 @@ class JWSEncoder:
 
 
 class ServerAPIClient:
-    def __init__(self, base_url: BaseUrl, jws_encoder: "JWSEncoder", timeout: int = 20):
+    def __init__(self, base_url: str, jws_encoder: "JWSEncoder", timeout: int = 20):
         self.base_url = base_url
         self.jws_encoder = jws_encoder
         self.timeout = timeout

@@ -1,0 +1,45 @@
+name: release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+    paths:
+      - 'pyproject.toml'
+
+jobs:
+  if_release:
+    if: |
+      ${{ github.event.pull_request.merged == true }}
+      && ${{ contains(github.event.pull_request.labels.*.name, 'release') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pdm-project/setup-pdm@v3
+        with:
+          python-version: "3.10"
+          cache: true
+          version: 2.7.0
+
+      - name: Publish package distributions to PyPI
+        env:
+          PDM_PUBLISH_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: pdm publish
+
+      - name: Check Version
+        id: check-version
+        run: |
+          echo version=$(pdm show --version) >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          generateReleaseNotes: true
+          tag: v${{ steps.check-version.outputs.version }}
+          commit: main

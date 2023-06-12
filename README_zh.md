@@ -13,7 +13,6 @@ storekit-python 是一个用于访问和验证 App Store 内购的 Python 包。
     - [App Store Server API](#app-store-server-api)
     - [App Store Server Notifications](#app-store-server-notifications)
     - [App Store Receipts](#app-store-receipts)
-- [异常处理](#异常处理)
 - [贡献](#贡献)
 - [许可证](#许可证)
 
@@ -31,53 +30,53 @@ pip install storekit-python
 
 获取 JWSEncoder 参数参考：[Generating tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_tokens_for_api_requests)
 
-    ```python
-    from storekit.app_store_server_api import BaseUrl, JWSEncoder, ServerAPIClient
+```python
+from storekit.app_store_server_api import BaseUrl, JWSEncoder, ServerAPIClient
 
-    client = ServerAPIClient(
-        base_url=BaseUrl.Production,
-        jws_encoder=JWSEncoder(
-            key_id="key_id",
-            private_key="private_key",
-            issuer_id="issuer_id",
-            bundle_id="bundle_id",
-        )
+client = ServerAPIClient(
+    base_url=BaseUrl.Production,
+    jws_encoder=JWSEncoder(
+        key_id="key_id",
+        private_key="private_key",
+        issuer_id="issuer_id",
+        bundle_id="bundle_id",
     )
+)
 
-    response = client.get_all_subscription_statuses("original_transaction_id")
-    print(response)
-    ```
+response = client.get_all_subscription_statuses("original_transaction_id")
+print(response)
+```
 
 ### App Store Server Notifications
 
 [启用App Store服务器通知](https://developer.apple.com/documentation/appstoreservernotifications/enabling_app_store_server_notifications)
 
-    ```python
-    from storekit.app_store_server_notifications import ResponseBodyV2
+```python
+from storekit.app_store_server_notifications import ResponseBodyV2
 
-    response = ResponseBodyV2.parse_obj(request_data)
-    print(response)
-    ```
+response = ResponseBodyV2.parse_obj(request_data)
+print(response)
+```
 
 ### App Store Receipts
 
 如何生成 password 参考：[Generating a Shared Secret](https://developer.apple.com/help/app-store-connect/configure-in-app-purchase-settings/generate-a-shared-secret-to-verify-receipts)
 
-    ```python
-    from storekit.app_store_receipts import ReceiptsClient, BaseUrl
+```python
+from storekit.app_store_receipts import ReceiptsClient, BaseUrl
 
-    client = ReceiptsClient(
-        base_url=BaseUrl.Production,
+client = ReceiptsClient(
+    base_url=BaseUrl.Production,
+    password="password",
+    sandbox_client=ReceiptsClient(
+        base_url=BaseUrl.Sandbox,
         password="password",
-        sandbox_client=ReceiptsClient(
-            base_url=BaseUrl.Sandbox,
-            password="password",
-        )
     )
+)
 
-    response = client.verify_receipt("receipt_data")
-    print(response)
-    ```
+response = client.verify_receipt("receipt_data")
+print(response)
+```
 
 ## 贡献
 

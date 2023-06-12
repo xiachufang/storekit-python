@@ -7,6 +7,10 @@ from storekit.models import Environment, JWSRenewalInfoDecodedPayload, JWSTransa
 from storekit.utils.enum import IntEnum
 
 
+class GetAllSubscriptionStatusesQueryParameters(BaseModel):
+    status: Optional["Status"] = None
+
+
 class Status(IntEnum):
     """
     The status of an auto-renewable subscription.

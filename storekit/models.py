@@ -107,6 +107,23 @@ class ProductType(StrEnum):
         return cls.Unknown
 
 
+class TransactionReason(StrEnum):
+    """
+    The cause of a purchase transaction, which indicates whether it’s a customer’s purchase or a renewal for an auto-renewable subscription that the system initiates.
+    https://developer.apple.com/documentation/appstoreserverapi/transactionreason
+    """
+
+    Purchase = "PURCHASE"
+    Renewal = "RENEWAL"
+
+    Unknown = "UNKNOWN"
+
+    @classmethod
+    def _missing_(cls, value: object) -> "TransactionReason":
+        logging.error(f"{cls.__name__} Undefined enumeration type: {value}")
+        return cls.Unknown
+
+
 class JWSRenewalInfoDecodedPayload(JWS):
     """
     A decoded payload containing subscription renewal information for an auto-renewable subscription.
@@ -117,6 +134,7 @@ class JWSRenewalInfoDecodedPayload(JWS):
     auto_renew_product_id: str = Field(alias="autoRenewProductId")
     product_id: str = Field(alias="productId")
     auto_renew_status: AutoRenewStatus = Field(alias="autoRenewStatus")
+    renewal_date: int = Field(alias="renewalDate", description="UNIX time, in milliseconds")
     environment: Environment
     signed_date: int = Field(alias="signedDate", description="UNIX time, in milliseconds")
     recent_subscription_start_date: int = Field(
@@ -149,6 +167,9 @@ class JWSTransactionDecodedPayload(JWS):
     in_app_ownership_type: InAppOwnershipType = Field(alias="inAppOwnershipType")
     signed_date: int = Field(alias="signedDate", description="UNIX time, in milliseconds")
     environment: Environment
+    storefront: str
+    storefront_id: str = Field(alias="storefrontId")
+    transaction_reason: TransactionReason = Field(alias="transactionReason")
     # only for auto-renewable subscriptions
     web_order_line_item_id: Optional[str] = Field(None, alias="webOrderLineItemId")
     subscription_group_identifier: Optional[str] = Field(None, alias="subscriptionGroupIdentifier")

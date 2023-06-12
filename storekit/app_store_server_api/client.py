@@ -11,7 +11,8 @@ from storekit.utils.enum import StrEnum
 from .exceptions import APIError, AuthenticationError, RetryableError
 from .history_response import GetTransactionHistoryQueryParameters, HistoryResponse
 from .order_look_up_response import OrderLookupResponse
-from .status_response import StatusResponse
+from .status_response import GetAllSubscriptionStatusesQueryParameters, StatusResponse
+from .transaction_info_response import TransactionInfoResponse
 
 
 class BaseUrl(StrEnum):
@@ -80,25 +81,38 @@ class ServerAPIClient:
         return resp
 
     def get_transaction_history(
-        self, original_transaction_id: str, params: Optional[GetTransactionHistoryQueryParameters] = None
+        self, transaction_id: str, params: Optional[GetTransactionHistoryQueryParameters] = None
     ) -> HistoryResponse:
         """
         Get a customer’s in-app purchase transaction history for your app.
         https://developer.apple.com/documentation/appstoreserverapi/get_transaction_history
         """
-        path = f"history/{original_transaction_id}"
+        path = f"history/{transaction_id}"
         resp = self.request(
             method="GET", path=path, params=params.dict(exclude_none=True, by_alias=True) if params else None
         )
         return HistoryResponse.parse_obj(resp.json())
 
-    def get_all_subscription_statuses(self, original_transaction_id: str) -> StatusResponse:
+    def get_transaction_info(self, transaction_id: str) -> TransactionInfoResponse:
+        """
+        Get information about a single transaction for your app.
+        https://developer.apple.com/documentation/appstoreserverapi/get_transaction_info
+        """
+        path = f"transactions/{transaction_id}"
+        resp = self.request(method="GET", path=path)
+        return TransactionInfoResponse.parse_obj(resp.json())
+
+    def get_all_subscription_statuses(
+        self, transaction_id: str, params: Optional[GetAllSubscriptionStatusesQueryParameters] = None
+    ) -> StatusResponse:
         """
         Get the statuses for all of a customer’s auto-renewable subscriptions in your app.
         https://developer.apple.com/documentation/appstoreserverapi/get_all_subscription_statuses
         """
-        path = f"subscriptions/{original_transaction_id}"
-        resp = self.request(method="GET", path=path)
+        path = f"subscriptions/{transaction_id}"
+        resp = self.request(
+            method="GET", path=path, params=params.dict(exclude_none=True, by_alias=True) if params else None
+        )
         return StatusResponse.parse_obj(resp.json())
 
     def look_up_order_id(self, order_id: str) -> OrderLookupResponse:

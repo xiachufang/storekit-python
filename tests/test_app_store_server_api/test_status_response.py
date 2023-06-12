@@ -4,7 +4,7 @@ from storekit.app_store_server_api.status_response import StatusResponse
 
 
 @pytest.fixture()
-def status_response_content(jws_mocker):
+def status_response_content(signed_renewal_info, signed_auto_renewable_subscription_transaction):
     return {
         "data": [
             {
@@ -13,36 +13,8 @@ def status_response_content(jws_mocker):
                     {
                         "originalTransactionId": "510001172393674",
                         "status": 1,
-                        "signedRenewalInfo": jws_mocker.encode(
-                            {
-                                "originalTransactionId": "220002745628668",
-                                "autoRenewProductId": "test_product_2",
-                                "productId": "test_product_2",
-                                "autoRenewStatus": 0,
-                                "environment": "Production",
-                                "signedDate": 1678343889311,
-                                "recentSubscriptionStartDate": 1678269588000,
-                            }
-                        ),
-                        "signedTransactionInfo": jws_mocker.encode(
-                            {
-                                "transactionId": "220002745628668",
-                                "originalTransactionId": "220002745628668",
-                                "bundleId": "com.abc",
-                                "productId": "test_product_2",
-                                "purchaseDate": 1658029753000,
-                                "originalPurchaseDate": 1658029755000,
-                                "quantity": 1,
-                                "type": "Auto-Renewable Subscription",
-                                "inAppOwnershipType": "PURCHASED",
-                                "signedDate": 1681674933496,
-                                "environment": "Production",
-                                "webOrderLineItemId": "220001229462830",
-                                "subscriptionGroupIdentifier": "41350172",
-                                "expiresDate": 1660708153000,
-                                "offerType": 1,
-                            }
-                        ),
+                        "signedRenewalInfo": signed_renewal_info,
+                        "signedTransactionInfo": signed_auto_renewable_subscription_transaction,
                     }
                 ],
             }

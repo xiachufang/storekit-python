@@ -1,6 +1,6 @@
 [project]
 name = "storekit-python"
-version = "0.1.0"
+version = "0.0.1"
 description = "The Storekit Python library provides support for in-app purchases and interactions with the App Store."
 authors = [
     { name = "crowser", email = "xuwendi@xiachufang.com" },

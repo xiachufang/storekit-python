@@ -1,2 +1,2 @@
-class AppStoreError(Exception):
+class StoreKitError(Exception):
     pass

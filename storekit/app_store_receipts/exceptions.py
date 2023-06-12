@@ -1,7 +1,7 @@
-from storekit.exceptions import AppStoreError
+from storekit.exceptions import StoreKitError
 
 
-class APIError(AppStoreError):
+class APIError(StoreKitError):
     """
     https://developer.apple.com/documentation/appstorereceipts/status
     """

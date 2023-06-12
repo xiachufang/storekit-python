@@ -1,8 +1,7 @@
-class AppStoreError(Exception):
-    pass
+from storekit.exceptions import StoreKitError
 
 
-class APIError(AppStoreError):
+class APIError(StoreKitError):
     def __init__(self, error_code: int, error_message: str):
         self.error_code = error_code
         self.error_message = error_message
@@ -22,7 +21,7 @@ class RetryableError(APIError):
             raise cls(api_error.error_code, api_error.error_message)
 
 
-class AuthenticationError(AppStoreError):
+class AuthenticationError(StoreKitError):
     """The JSON Web Token (JWT) in the authorization header is invalid. For more information, see Generating Tokens for API Requests.
     https://developer.apple.com/documentation/appstoreserverapi/generating_tokens_for_api_requests
     """

@@ -101,3 +101,67 @@ class JwsMocker:
 def jws_mocker():
     with JwsMocker() as mocker:
         yield mocker
+
+
+@pytest.fixture()
+def signed_non_renewing_subscription_transaction(jws_mocker) -> str:
+    return jws_mocker.encode(
+        {
+            "transactionId": "300002749490668",
+            "originalTransactionId": "300002749490668",
+            "bundleId": "com.abc",
+            "productId": "test_product_1",
+            "purchaseDate": 1681660134000,
+            "originalPurchaseDate": 1681660134000,
+            "quantity": 1,
+            "type": "Non-Renewing Subscription",
+            "inAppOwnershipType": "PURCHASED",
+            "signedDate": 1681674545204,
+            "environment": "Production",
+            "transactionReason": "PURCHASE",
+            "storefront": "CHN",
+            "storefrontId": "286930",
+        }
+    )
+
+
+@pytest.fixture()
+def signed_auto_renewable_subscription_transaction(jws_mocker) -> str:
+    return jws_mocker.encode(
+        {
+            "transactionId": "220002745628668",
+            "originalTransactionId": "220002745628668",
+            "bundleId": "com.abc",
+            "productId": "test_product_2",
+            "purchaseDate": 1658029753000,
+            "originalPurchaseDate": 1658029755000,
+            "quantity": 1,
+            "type": "Auto-Renewable Subscription",
+            "inAppOwnershipType": "PURCHASED",
+            "signedDate": 1681674933496,
+            "environment": "Production",
+            "webOrderLineItemId": "220001229462830",
+            "subscriptionGroupIdentifier": "41350172",
+            "expiresDate": 1660708153000,
+            "offerType": 1,
+            "transactionReason": "PURCHASE",
+            "storefront": "CHN",
+            "storefrontId": "286930",
+        }
+    )
+
+
+@pytest.fixture()
+def signed_renewal_info(jws_mocker) -> str:
+    return jws_mocker.encode(
+        {
+            "originalTransactionId": "220002745628668",
+            "autoRenewProductId": "test_product_2",
+            "productId": "test_product_2",
+            "autoRenewStatus": 1,
+            "signedDate": 1686559782601,
+            "environment": "Production",
+            "recentSubscriptionStartDate": 1658029753000,
+            "renewalDate": 1686973753000,
+        }
+    )

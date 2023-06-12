@@ -4,24 +4,22 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/storekit-python.svg)](https://pypi.python.org/pypi/storekit-python/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[简体中文](https://github.com/xiachufang/storekit-python/blob/main/README_zh.md)
+storekit-python 是一个用于访问和验证 App Store 内购的 Python 包。
 
-storekit-python is a Python package for accessing and validating App Store in-app purchases.
+## 目录
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
+- [安装方法](#安装方法)
+- [如何使用](#如何使用)
     - [App Store Server API](#app-store-server-api)
     - [App Store Server Notifications](#app-store-server-notifications)
     - [App Store Receipts](#app-store-receipts)
-- [Exception Handling](#exception-handling)
-- [Contributing](#contributing)
-- [License](#license)
+- [异常处理](#异常处理)
+- [贡献](#贡献)
+- [许可证](#许可证)
 
-## Installation
+## 安装方法
 
-Install via pip:
+使用 pip 进行安装:
 
 ```bash
 pip install storekit-python
@@ -31,7 +29,7 @@ pip install storekit-python
 
 ### App Store Server API
 
-Get JWSEncoder parameters reference: [Generating tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_tokens_for_api_requests)
+获取 JWSEncoder 参数参考：[Generating tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_tokens_for_api_requests)
 
     ```python
     from storekit.app_store_server_api import BaseUrl, JWSEncoder, ServerAPIClient
@@ -52,7 +50,7 @@ Get JWSEncoder parameters reference: [Generating tokens for API requests](https:
 
 ### App Store Server Notifications
 
-[Enabling App Store Server Notifications](https://developer.apple.com/documentation/appstoreservernotifications/enabling_app_store_server_notifications)
+[启用App Store服务器通知](https://developer.apple.com/documentation/appstoreservernotifications/enabling_app_store_server_notifications)
 
     ```python
     from storekit.app_store_server_notifications import ResponseBodyV2
@@ -63,7 +61,7 @@ Get JWSEncoder parameters reference: [Generating tokens for API requests](https:
 
 ### App Store Receipts
 
-How to generate a password reference: [Generating a Shared Secret](https://developer.apple.com/help/app-store-connect/configure-in-app-purchase-settings/generate-a-shared-secret-to-verify-receipts)
+如何生成 password 参考：[Generating a Shared Secret](https://developer.apple.com/help/app-store-connect/configure-in-app-purchase-settings/generate-a-shared-secret-to-verify-receipts)
 
     ```python
     from storekit.app_store_receipts import ReceiptsClient, BaseUrl
@@ -81,10 +79,10 @@ How to generate a password reference: [Generating a Shared Secret](https://devel
     print(response)
     ```
 
-## Contributing
+## 贡献
 
-We welcome contributions of all forms! You can participate in this project by reporting issues, submitting PRs, or improving documentation.
+我们欢迎各种形式的贡献！你可以通过报告 issues、提交 PRs 或者改进文档等来参与这个项目。
 
-## License
+## 许可证
 
-storekit-python is open-source under the [MIT License](https://github.com/xiachufang/storekit-python/blob/main/LICENSE).
+storekit-python 采用 [MIT License](https://github.com/xiachufang/storekit-python/blob/main/LICENSE) 开源。

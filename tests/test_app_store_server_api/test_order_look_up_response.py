@@ -4,30 +4,10 @@ from storekit.app_store_server_api.order_look_up_response import OrderLookupResp
 
 
 @pytest.fixture()
-def order_look_up_response_content(jws_mocker):
+def order_look_up_response_content(signed_auto_renewable_subscription_transaction):
     return {
         "status": 0,
-        "signedTransactions": [
-            jws_mocker.encode(
-                {
-                    "transactionId": "220002745628668",
-                    "originalTransactionId": "220002745628668",
-                    "bundleId": "com.abc",
-                    "productId": "test_product_2",
-                    "purchaseDate": 1658029753000,
-                    "originalPurchaseDate": 1658029755000,
-                    "quantity": 1,
-                    "type": "Auto-Renewable Subscription",
-                    "inAppOwnershipType": "PURCHASED",
-                    "signedDate": 1681674933496,
-                    "environment": "Production",
-                    "webOrderLineItemId": "220001229462830",
-                    "subscriptionGroupIdentifier": "41350172",
-                    "expiresDate": 1660708153000,
-                }
-            ),
-        ]
-        * 3,
+        "signedTransactions": [signed_auto_renewable_subscription_transaction] * 3,
     }
 
 

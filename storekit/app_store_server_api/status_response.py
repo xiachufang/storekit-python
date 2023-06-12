@@ -7,6 +7,10 @@ from storekit.models import Environment, JWSRenewalInfoDecodedPayload, JWSTransa
 from storekit.utils.enum import IntEnum
 
 
+class GetAllSubscriptionStatusesQueryParameters(BaseModel):
+    status: Optional["Status"] = None
+
+
 class Status(IntEnum):
     """
     The status of an auto-renewable subscription.
@@ -57,5 +61,5 @@ class StatusResponse(BaseModel):
 
     data: List[SubscriptionGroupIdentifierItem]
     environment: Environment
-    app_apple_id: Optional[int] = Field(alias="appAppleId")
+    app_apple_id: Optional[int] = Field(None, alias="appAppleId")
     bundle_id: str = Field(alias="bundleId")

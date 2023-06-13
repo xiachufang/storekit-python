@@ -20,7 +20,7 @@ class BaseUrl(StrEnum):
     Sandbox = "https://api.storekit-sandbox.itunes.apple.com"
 
 
-class JWSEncoder:
+class SignedTokenEncoder:
     def __init__(self, key_id: str, private_key: str, issuer_id: str, bundle_id: str, algorithm: str = "ES256"):
         self.key_id = key_id
         self.private_key = private_key
@@ -43,9 +43,9 @@ class JWSEncoder:
 
 
 class ServerAPIClient:
-    def __init__(self, base_url: str, jws_encoder: "JWSEncoder", timeout: int = 20):
+    def __init__(self, base_url: str, signed_token_encoder: "SignedTokenEncoder", timeout: int = 20):
         self.base_url = base_url
-        self.jws_encoder = jws_encoder
+        self.signed_token_encoder = signed_token_encoder
         self.timeout = timeout
 
         self._session: Optional[requests.Session] = None
@@ -62,7 +62,7 @@ class ServerAPIClient:
         """
         prefix = "/inApps/v1"
         url = urljoin(self.base_url, f"{prefix}/{path.strip('/')}")
-        auth_headers = {"Authorization": f"Bearer {self.jws_encoder()}"}
+        auth_headers = {"Authorization": f"Bearer {self.signed_token_encoder()}"}
 
         resp = self.session.request(method=method, url=url, headers=auth_headers, timeout=self.timeout, **kwargs)
 

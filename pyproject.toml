@@ -59,8 +59,8 @@ profile = "black"
 line_length = 120
 
 [tool.black]
-line-length = 120
 target-version = ["py37", "py38", "py39", "py310"]
+line-length = 120
 
 [tool.mypy]
 plugins = ["pydantic.mypy"]

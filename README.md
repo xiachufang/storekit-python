@@ -1,8 +1,8 @@
 # storekit-python
 
-[![PyPI version](https://badge.fury.io/py/storekit-python.svg)](https://badge.fury.io/py/storekit-python)
-[![Python Versions](https://img.shields.io/pypi/pyversions/storekit-python.svg)](https://pypi.python.org/pypi/storekit-python/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![pypi](https://img.shields.io/pypi/v/storekit-python.svg)](https://pypi.python.org/pypi/storekit-python)
+[![versions](https://img.shields.io/pypi/pyversions/storekit-python.svg)](https://github.com/xiachufang/storekit-python)
+[![license](https://img.shields.io/github/license/xiachufang/storekit-python.svg)](https://github.com/xiachufang/storekit-python/blob/main/LICENSE)
 
 [简体中文](https://github.com/xiachufang/storekit-python/blob/main/README_zh.md)
 

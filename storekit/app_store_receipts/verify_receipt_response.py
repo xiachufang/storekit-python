@@ -108,3 +108,19 @@ class ResponseBody(BaseModel):
     latest_receipt: str = ""
     latest_receipt_info: List[Transaction] = []
     pending_renewal_info: List[RenewalInfo] = []
+
+    def get_last_transaction(self, product_id: str) -> Optional[Transaction]:
+        transactions = [_t for _t in self.latest_receipt_info if _t.product_id == product_id] or [
+            _t for _t in self.receipt.in_app if _t.product_id == product_id
+        ]
+
+        try:
+            return sorted(transactions, key=lambda x: x.purchase_date_ms, reverse=True)[0]
+        except IndexError:
+            return None
+
+    def get_renewal_info(self, original_transaction_id: str) -> Optional[RenewalInfo]:
+        try:
+            return next(_r for _r in self.pending_renewal_info if _r.original_transaction_id == original_transaction_id)
+        except StopIteration:
+            return None

@@ -18,7 +18,9 @@ class BaseUrl(StrEnum):
 class ReceiptsClient:
     STATUS_SANDBOX_RECEIPT_ERROR = 21007
 
-    def __init__(self, base_url: str, password: str, sandbox_client: Optional["ReceiptsClient"], timeout: int = 20):
+    def __init__(
+        self, base_url: str, password: str, sandbox_client: Optional["ReceiptsClient"] = None, timeout: int = 20
+    ):
         self.base_url = base_url
         self.password = password
         self.sandbox_client = sandbox_client
@@ -53,8 +55,8 @@ class ReceiptsClient:
 
     def verify_receipt(self, receipt_data: str, exclude_old_transactions: bool = False) -> ResponseBody:
         """
-        Get a customer’s in-app purchase transaction history for your app.
-        https://developer.apple.com/documentation/appstoreserverapi/get_transaction_history
+        Send a receipt to the App Store for verification.
+        https://developer.apple.com/documentation/appstorereceipts/verifyreceipt
         """
 
         payload = {

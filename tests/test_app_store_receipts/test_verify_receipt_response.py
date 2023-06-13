@@ -84,6 +84,9 @@ def verify_receipt_response(jws_mocker):
 
 def test_verify_receipt_response(verify_receipt_response):
     resp = ResponseBody.parse_obj(verify_receipt_response)
-    assert resp.latest_receipt_info[0].transaction_id == "225000725999746"
-    assert resp.pending_renewal_info[0].original_transaction_id == "225000725999746"
-    assert resp.receipt.in_app[0].transaction_id == "225000725999746"
+
+    last_transaction = resp.get_last_transaction("test_product_2")
+    assert last_transaction.transaction_id == "225000725999746"
+
+    renewal_info = resp.get_renewal_info(last_transaction.original_transaction_id)
+    assert renewal_info.original_transaction_id == "225000725999746"

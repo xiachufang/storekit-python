@@ -28,19 +28,19 @@ pip install storekit-python
 
 ### App Store Server API
 
-获取 JWSEncoder 参数参考：[Generating tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_tokens_for_api_requests)
+获取 SignedTokenEncoder 参数参考：[Generating tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_tokens_for_api_requests)
 
 ```python
-from storekit.app_store_server_api import BaseUrl, JWSEncoder, ServerAPIClient
+from storekit.app_store_server_api import BaseUrl, SignedTokenEncoder, ServerAPIClient
 
 client = ServerAPIClient(
-    base_url=BaseUrl.Production,
-    jws_encoder=JWSEncoder(
-        key_id="key_id",
-        private_key="private_key",
-        issuer_id="issuer_id",
-        bundle_id="bundle_id",
-    )
+  base_url=BaseUrl.Production,
+  signed_token_encoder=SignedTokenEncoder(
+    key_id="key_id",
+    private_key="private_key",
+    issuer_id="issuer_id",
+    bundle_id="bundle_id",
+  )
 )
 
 response = client.get_all_subscription_statuses("original_transaction_id")

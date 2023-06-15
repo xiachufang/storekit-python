@@ -52,7 +52,7 @@ class Receipt(BaseModel):
     app_item_id: int = 0
     application_version: str = ""
     bundle_id: str = ""
-    download_id: int = 0
+    download_id: Optional[int] = None
     expiration_date: str = ""
     expiration_date_ms: int = 0
     expiration_date_pst: str = ""
